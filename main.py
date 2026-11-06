@@ -1,32 +1,28 @@
+#!/usr/bin/env python3
+
 from data import data
-# from colorama import Fore, Back, Style
-from termcolor import colored
+
+colors = {
+    'B': 34,
+    'W': 37,
+    'G': 32,
+    'Y': 33,
+    'M': 35,
+    'R': 31,
+    'C': 36,
+}
+reset = 0
 
 # iterate over rows
 for row in data:
     # iterate over chunks in the row
     for chunk in row:
-        # check the color
-        if chunk[1] == 'B':
-            color = 'blue'
-        elif chunk[1] == 'W':
-            color = 'white'
-        elif chunk[1] == 'G':
-            color = 'green'
-        elif chunk[1] == 'Y':
-            color = 'yellow'
-        elif chunk[1] == 'M':
-            color = 'magenta'
-        elif chunk[1] == 'R':
-            color = 'red'
-        elif chunk[1] == 'C':
-            color = 'cyan'
-        else:
-            color = 'white'
-
         # print chunk in selected color
+        color = colors.get(chunk[1], colors['W'])
+        print(f'\033[{color}m', end='')
         for char in range(chunk[0]):
-            print(colored('█', color), end='')
+            print('█', end='')
+        print(f'\033[{reset}m', end='')
 
     # at the end of the row print a new line
     print('')
