@@ -6,6 +6,13 @@ Render pixel art from a text file:
 python3 main.py data/test.txt
 ```
 
+Print the complete xterm-256 color palette with its indexes. The RGB cube is
+shown in one table, with red levels as columns:
+
+```sh
+python3 main.py --palette
+```
+
 The file has a `[colours]` section that maps names to xterm-256 palette indexes
 (0-255), separated by whitespace, followed by a `[diagram]` section. Each
 diagram row contains space-separated chunks, with each chunk written as a pixel
