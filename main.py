@@ -1,28 +1,23 @@
 #!/usr/bin/env python3
 
-from data import data
+import argparse
+from pathlib import Path
 
-colors = {
-    'B': 34,
-    'W': 37,
-    'G': 32,
-    'Y': 33,
-    'M': 35,
-    'R': 31,
-    'C': 36,
-}
-reset = 0
+from art_parser import load_art
+from renderer import render_art
 
-# iterate over rows
-for row in data:
-    # iterate over chunks in the row
-    for chunk in row:
-        # print chunk in selected color
-        color = colors.get(chunk[1], colors['W'])
-        print(f'\033[{color}m', end='')
-        for char in range(chunk[0]):
-            print('█', end='')
-        print(f'\033[{reset}m', end='')
 
-    # at the end of the row print a new line
-    print('')
+def main():
+    parser = argparse.ArgumentParser(description='Render pixel art from a text file.')
+    parser.add_argument('filename', type=Path, help='path to the pixel-art text file')
+    args = parser.parse_args()
+
+    try:
+        colors, data = load_art(args.filename)
+        render_art(colors, data)
+    except (OSError, ValueError) as error:
+        parser.error(str(error))
+
+
+if __name__ == '__main__':
+    main()

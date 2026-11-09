@@ -1,0 +1,13 @@
+[colours]
+Bl 34
+W 37
+G 32
+Y 33
+M 35
+R 31
+C 36
+
+[diagram]
+12Bl 6W 2Y
+15Bl 5W
+6G 7C 1W 6M
