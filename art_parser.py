@@ -33,17 +33,21 @@ def load_art(path: Path) -> tuple[dict[str, int], list[list[tuple[int, str]]]]:
         if section == 'colours':
             parts = line.split()
             if len(parts) != 2:
-                raise ValueError(f'{path}:{line_number}: expected NAME ANSI_CODE')
-            name, code_text = parts
+                raise ValueError(f'{path}:{line_number}: expected NAME PALETTE_INDEX')
+            name, index_text = parts
             try:
-                code = int(code_text)
+                color_index = int(index_text)
             except ValueError as error:
-                raise ValueError(f'{path}:{line_number}: ANSI code must be an integer') from error
-            if code < 0:
-                raise ValueError(f'{path}:{line_number}: ANSI code cannot be negative')
+                raise ValueError(
+                    f'{path}:{line_number}: palette index must be an integer'
+                ) from error
+            if not 0 <= color_index <= 255:
+                raise ValueError(
+                    f'{path}:{line_number}: palette index must be between 0 and 255'
+                )
             if name in colors:
                 raise ValueError(f'{path}:{line_number}: duplicate colour {name!r}')
-            colors[name] = code
+            colors[name] = color_index
             continue
 
         row = []
