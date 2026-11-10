@@ -33,6 +33,8 @@ def main():
         parser.error('filename is required unless --palette is used')
 
     try:
+        colors: dict[str, int]
+        data: list[list[tuple[int, str]]]
         colors, data = load_art(args.filename)
         render_art(colors, data)
     except (OSError, ValueError) as error:
