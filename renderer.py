@@ -80,11 +80,11 @@ def print_palette() -> None:
         print()
 
 
-def render_art(colors: dict[str, int], rows: list[list[tuple[int, str]]]) -> None:
+def render_art(colours: dict[str, int], rows: list[list[tuple[int, str]]]) -> None:
     for row_index in range(0, len(rows), 2):
-        top_row = _pixel_codes(rows[row_index], colors)
+        top_row = _pixel_codes(rows[row_index], colours)
         bottom_row = (
-            _pixel_codes(rows[row_index + 1], colors)
+            _pixel_codes(rows[row_index + 1], colours)
             if row_index + 1 < len(rows)
             else iter(())
         )

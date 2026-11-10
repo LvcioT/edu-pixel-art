@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 def load_art(path: Path) -> tuple[dict[str, int], list[list[tuple[int, str]]]]:
-    colors = {}
+    colours = {}
     rows = []
     sections = set()
     section = None
@@ -45,9 +45,9 @@ def load_art(path: Path) -> tuple[dict[str, int], list[list[tuple[int, str]]]]:
                 raise ValueError(
                     f'{path}:{line_number}: palette index must be between 0 and 255'
                 )
-            if name in colors:
+            if name in colours:
                 raise ValueError(f'{path}:{line_number}: duplicate colour {name!r}')
-            colors[name] = color_index
+            colours[name] = color_index
             continue
 
         row = []
@@ -59,7 +59,7 @@ def load_art(path: Path) -> tuple[dict[str, int], list[list[tuple[int, str]]]]:
             color_name = match.group(2)
             if count == 0:
                 raise ValueError(f'{path}:{line_number}: chunk size must be positive')
-            if color_name not in colors:
+            if color_name not in colours:
                 raise ValueError(
                     f'{path}:{line_number}: undefined colour {color_name!r}'
                 )
@@ -68,9 +68,9 @@ def load_art(path: Path) -> tuple[dict[str, int], list[list[tuple[int, str]]]]:
 
     if 'colours' not in sections or 'diagram' not in sections:
         raise ValueError(f'{path}: file must contain [colours] and [diagram] sections')
-    if not colors:
+    if not colours:
         raise ValueError(f'{path}: [colours] section must define at least one colour')
     if not rows:
         raise ValueError(f'{path}: [diagram] section must contain at least one row')
 
-    return colors, rows
+    return colours, rows

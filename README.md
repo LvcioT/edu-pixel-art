@@ -1,5 +1,9 @@
 # edu-pixel-art
 
+This is an educational project designed for teachers in lower-grade schools and as a programming example for middle-grade learners. It is a simple way to explore pixel art, color palettes, and text-based rendering while building approachable programming exercises.
+
+Contributors are welcome, especially for adding more templates and improving the learning experience.
+
 Render pixel art from a text file:
 
 ```sh
